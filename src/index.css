@@ -1,3 +1,16 @@
+body,body[data-theme="dark"]{
+  --color-text-primary: #e3e3e3;
+  --color-text-secondary: #0f0f0f;
+  --color-bg-primary: #010415;
+  --color-bg-secondary: #141727;
+}
+
+body[data-theme="light"] {
+  --color-text-primary: #002c45;
+  --color-text-secondary: #ffffff;
+  --color-bg-primary: #fdfcf6;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +18,115 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+    color: var(--color-text-primary);
+    background: var(--color-bg-primary);
+    transition: background 0.25s ease-in-out;
+    scroll-behavior: smooth;
+    scroll-padding-top: 2em;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.page-con{
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.search-con{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3em;
+}
+
+.card-list{
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(200px,auto));
+  /* grid-template-columns: 1fr 1fr 1fr; */
+  grid-gap: 2em;
+  gap: 2em;
+  justify-content: center;
+}
+
+.card{
+  display: flex;
+  justify-content: center;
+}
+
+.card img{
+  max-width: 200px;
+  border-radius: 10px;
+  display: inline;
+}
+
+.info-card img{
+  max-width: 300px;
+}
+
+.Rare:hover img{
+  filter: drop-shadow(2px 4px 6px purple);
+}
+
+.card div:after{
+  background-position: 50% 50%;
+}
+
+.card .Holo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-repeat: no-repeat;
+  opacity: .5;
+  mix-blend-mode: color-dodge;
+  transition: all .33s ease;
+  border-radius: 1em;
+}
+
+.Holo{
+  position: relative;
+  z-index: 1;
+}
+
+.Holo:hover::after{
+  opacity: 1;
+  background-image: url("https://assets.codepen.io/13471/sparkles.gif");
+  background-position: 50% 50%;
+  background-size: 160%;
+  background-blend-mode: overlay;
+  z-index: 2;
+  filter: brightness(1) contrast(1);
+  mix-blend-mode: color-dodge;
+}
+
+.VMAX:hover::after{
+  opacity: .5;
+  background-image: url("https://res.cloudinary.com/simey/image/upload/Dev/PokemonCards/vmaxbg.webp");
+  background-position: 50% 50%;
+  background-size: 210%;
+  background-blend-mode: overlay;
+  z-index: 2;
+  filter: brightness(1) contrast(1);
+  mix-blend-mode: color-dodge;
+}
+
+.V:hover::after{
+  opacity: .7;
+  background-image: url("https://res.cloudinary.com/simey/image/upload/Dev/PokemonCards/ancient.webp");
+  background-position: 50% 50%;
+  background-size: 160%;
+  background-blend-mode: overlay;
+  z-index: 2;
+  filter: brightness(1) contrast(1);
+  mix-blend-mode: soft-light;
+}
+
+
+
+.card-main-con{
+  display: flex;
+  justify-content: start;
+}
+
+.card-main-con .info-card{
+  width: 40%;
 }

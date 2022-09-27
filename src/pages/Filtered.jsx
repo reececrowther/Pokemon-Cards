@@ -2,22 +2,21 @@ import React, { useEffect, useState } from 'react'
 import Tilt from 'react-tilt'
 import { Link, useParams } from 'react-router-dom'
 
-
-
-function Searched() {
+function Filtered() {
     const [cards, setCards] = useState([]);
     const [isLoading, setLoading] = useState(true);
     let params = useParams();
     
     useEffect( () => {
-        fetchSearched(params.search);
-    },[params.search]);
+        fetchSearched(params.filter);
+        console.log("URL: " + params.filter);
+    },[params.filter]);
     
     
-    const fetchSearched = async (name) => {
-        const api = await fetch(`https://api.pokemontcg.io/v2/cards/?q=name:${name}*&?orderBy=number&?apiKey=${process.env.REACT_APP_API_KEY}`);
+    const fetchSearched = async (type) => {
+        const api = await fetch(`https://api.pokemontcg.io/v2/cards?q=${type}&?orderBy=name&?apiKey=${process.env.REACT_APP_API_KEY}`);
         const data = await api.json();
-        console.log(data);
+        console.log("filter data: " + data.data);
         setCards(data.data);
         setLoading(false);
     };
@@ -55,4 +54,4 @@ function Searched() {
       )
     }
 
-export default Searched
+export default Filtered

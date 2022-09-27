@@ -6,6 +6,7 @@ function Filter() {
 
     const [type, settype] = useState([]);
     const [subType, setSubType] = useState([]);
+    const [set, setSet] = useState([]);
     const navigate = useNavigate();
 
     const submitHandeler = (e) => {
@@ -41,11 +42,26 @@ function Filter() {
         url.push("subtypes:"+subType[0].value);
       }
       
-      let finalURL = url.join(" ");
-      navigate('/filtered/'+finalURL);
+//Sets
+      if (set.length > 1 ){
+        let setUrl = [];
+        set.forEach(element => {
+          setUrl.push(element.value);
+      });
 
-        
-    }; 
+      let newSetUrl = setUrl.join("&set.id:");
+      url.push("set.id:"+newSetUrl);
+
+
+      } else if(set.length === 1){
+        url.push("set.id:"+set[0].value);
+      }
+
+      let finalURL = url.join(" ");
+      navigate('/filtered/'+finalURL);  
+      }; 
+
+
 
     // Array of types options
   const optionList = [
@@ -101,6 +117,40 @@ function Filter() {
   }
 
 
+     // Array of types options
+     const optionListSets = [
+      { value: "xy7", label: "Ancient Origins" },
+      { value: "ecard2", label: "Aquapolis" },
+      { value: "pl4", label: "Arceus" },
+      { value: "swsh10", label: "Astral Radiance" },
+      { value: "swsh10tg", label: "Astral Radiance Trainer Gallery" },
+      { value: "xy9", label: "BREAKpoint" },
+      { value: "xy8", label: "BREAKthrough" },
+      { value: "bwp", label: "BW Black Star Promos" },
+      { value: "base1", label: "Base" },
+      { value: "base4", label: "Base Set 2" },
+      { value: "swsh5", label: "Battle Styles" },
+      { value: "bp", label: "Best of Game" },
+      { value: "bw1", label: "Black & White" },
+      { value: "bw7", label: "Boundaries Crossed" },
+      { value: "swsh9", label: "Brilliant Stars" },
+      { value: "swsh9tg", label: "Brilliant Stars Trainer Gallery" },
+      { value: "sm3", label: "Burning Shadows" },
+      { value: "col1", label: "Call of Legends" },
+      { value: "cel25", label: "Celebrations" },
+      { value: "cel25c", label: "Celebrations: Classic Collection" },
+      { value: "sm7", label: "Celestial Storm" },
+      { value: "swsh35", label: "Champion's Path" },
+      { value: "swsh6", label: "Chilling Reign" },
+      { value: "sm12", label: "Cosmic Eclipse" }
+      //NEEDS THE REST
+    ];
+  
+    // Function triggered on selection
+    function handleSets(setData) {
+      setSet(setData);
+    }
+
   return (
     <div className='filter-con page-con'>
         <form onSubmit={submitHandeler}>
@@ -118,6 +168,14 @@ function Filter() {
                 placeholder="Select Subtype/s"
                 value={subType}
                 onChange={handleSubType}
+                isSearchable={true}
+                isMulti
+            />
+            <Select
+                options={optionListSets}
+                placeholder="Select Set"
+                value={set}
+                onChange={handleSets}
                 isSearchable={true}
                 isMulti
             />
